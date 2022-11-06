@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div>
       <p className="text-4xl font-bold text-center">
-        I GOW BY HELPING PEOPLE IN NEED.
+        I GROW BY HELPING PEOPLE IN NEED.
       </p>
       <div className="flex justify-center py-10">
         <div className="form-control">

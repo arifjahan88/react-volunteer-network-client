@@ -1,33 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logos/Group 1329.png";
+import { AuthContext } from "../../Contexts/AuthProvider";
 
 const Navber = () => {
+  const { logout, user } = useContext(AuthContext);
+
   const navoptions = (
     <>
       <li className="font-semibold">
         <Link>Home</Link>
         <Link>Donation</Link>
-        <Link>Events</Link>
+        <Link to="/eventdetails">Events</Link>
         <Link>Blogs</Link>
+        {user?.uid && (
+          <Link className="font-bold text-orange-600">{user.displayName}</Link>
+        )}
       </li>
     </>
   );
   const navbuttons = (
     <>
-      <Link to="/login">
-        <button className="bg-blue-500 mx-1 py-2 px-8 rounded-md text-white semi-bold ">
-          Log In
+      {user?.uid ? (
+        <button
+          onClick={logout}
+          className="bg-red-500 mx-1 py-2 px-8 rounded-md text-white semi-bold hover:bg-red-400"
+        >
+          LogOut
+        </button>
+      ) : (
+        <>
+          <Link to="/login">
+            <button className="bg-blue-500 mx-1 py-2 px-8 rounded-md text-white semi-bold hover:bg-blue-400">
+              Log In
+            </button>
+          </Link>
+          <Link to="/register">
+            <button className="bg-orange-500 mx-1 py-2 px-8 rounded-md text-white semi-bold hover:bg-orange-400">
+              Register
+            </button>
+          </Link>
+        </>
+      )}
+      <Link to="/events">
+        <button className="bg-gray-800 mx-1 py-2 px-8 rounded-md text-white semi-bold hover:bg-gray-400">
+          Admin
         </button>
       </Link>
-      <Link to="/register">
-        <button className="bg-orange-500 mx-1 py-2 px-8 rounded-md text-white semi-bold">
-          Register
-        </button>
-      </Link>
-      <button className="bg-gray-800 mx-1 py-2 px-8 rounded-md text-white semi-bold">
-        Admin
-      </button>
     </>
   );
   return (
